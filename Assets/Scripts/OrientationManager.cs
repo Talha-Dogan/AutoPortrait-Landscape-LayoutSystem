@@ -1,38 +1,45 @@
-﻿using UnityEngine;
+﻿/*
+ * Simple Responsive UI System
+ * Copyright (c) 2026 Talha Doğan
+ * * Developed by Talha Doğan to manage dynamic UI layouts for Portrait and Landscape modes.
+ */
+
+using UnityEngine;
 using UnityEngine.UI;
 
 namespace SimpleResponsiveUI
 {
     /// <summary>
     /// Automatically detects screen orientation changes and updates all ResponsiveTransform components.
-    /// Runs in both Edit Mode and Play Mode to provide real-time feedback.
+    /// Runs in both Edit Mode and Play Mode.
     /// </summary>
     [ExecuteAlways]
+    [DefaultExecutionOrder(-100)] // Ensures this initializes before other UI scripts
     [AddComponentMenu("Simple Responsive UI/Orientation Manager")]
     public class OrientationManager : MonoBehaviour
     {
         public static OrientationManager Instance { get; private set; }
 
         [Header("Canvas Settings")]
-        [Tooltip("The main Canvas Scaler to adjust. If empty, it will be found automatically.")]
+        [Tooltip("The main Canvas Scaler to adjust. Found automatically if empty.")]
         public CanvasScaler mainCanvasScaler;
 
         [Tooltip("The reference resolution for the UI (Default: 1920x1080).")]
         public Vector2 referenceResolution = new Vector2(1920, 1080);
 
         [Header("Match Settings")]
-        [Tooltip("Match value for Landscape mode (0=Width, 1=Height). Default: 0.5")]
-        [Range(0f, 1f)] public float landscapeMatch = 0.5f;
+        [Range(0f, 1f), Tooltip("Match value for Landscape (0=Width, 1=Height).")]
+        public float landscapeMatch = 0.5f;
 
-        [Tooltip("Match value for Portrait mode (0=Width, 1=Height). Default: 0 (Width) is recommended for mobile.")]
-        [Range(0f, 1f)] public float portraitMatch = 0f;
+        [Range(0f, 1f), Tooltip("Match value for Portrait (0=Width, 1=Height).")]
+        public float portraitMatch = 0f;
 
         private bool _lastIsPortrait;
         private bool _firstRun = true;
 
         private void Awake()
         {
-            // Handle Singleton pattern safely for both Editor and Play modes
+            // Singleton Logic
             if (Application.isPlaying)
             {
                 if (Instance == null)
@@ -47,14 +54,12 @@ namespace SimpleResponsiveUI
             }
             else
             {
-                // In Editor mode, just assign the instance without DontDestroyOnLoad
-                Instance = this;
+                Instance = this; // Editor Mode Singleton
             }
         }
 
         private void Start()
         {
-            // Auto-find CanvasScaler if missing
             if (mainCanvasScaler == null)
                 mainCanvasScaler = FindFirstObjectByType<CanvasScaler>();
 
@@ -63,7 +68,6 @@ namespace SimpleResponsiveUI
 
         private void Update()
         {
-            // continuously check orientation in both Edit and Play modes
             CheckOrientationAndRefresh();
         }
 
@@ -74,7 +78,7 @@ namespace SimpleResponsiveUI
             // Determine orientation: True if Height > Width
             bool currentIsPortrait = Screen.height > Screen.width;
 
-            // Update if orientation changed OR if it's the first run
+            // Update only if orientation changed or it is the first run
             if (currentIsPortrait != _lastIsPortrait || _firstRun)
             {
                 _lastIsPortrait = currentIsPortrait;
@@ -83,27 +87,24 @@ namespace SimpleResponsiveUI
                 UpdateCanvasSettings(currentIsPortrait);
                 UpdateAllPanels(currentIsPortrait);
 
-                // Log only in Play Mode to keep Editor Console clean
                 if (Application.isPlaying)
+                {
                     Debug.Log($"[OrientationManager] Orientation Changed: {(currentIsPortrait ? "Portrait" : "Landscape")}");
+                }
             }
         }
 
         private void UpdateCanvasSettings(bool isPortrait)
         {
-            if (mainCanvasScaler == null) return;
-
             mainCanvasScaler.uiScaleMode = CanvasScaler.ScaleMode.ScaleWithScreenSize;
             mainCanvasScaler.referenceResolution = referenceResolution;
-
-            // Adjust 'Match' value based on orientation
             mainCanvasScaler.matchWidthOrHeight = isPortrait ? portraitMatch : landscapeMatch;
         }
 
         private void UpdateAllPanels(bool isPortrait)
         {
-            // Find all ResponsiveTransform components efficiently (including inactive ones)
-            ResponsiveTransform[] allUI = FindObjectsByType<ResponsiveTransform>(FindObjectsInactive.Include, FindObjectsSortMode.None);
+            // Efficiently find all ResponsiveTransforms (including inactive ones)
+            var allUI = FindObjectsByType<ResponsiveTransform>(FindObjectsInactive.Include, FindObjectsSortMode.None);
 
             foreach (var uiElement in allUI)
             {

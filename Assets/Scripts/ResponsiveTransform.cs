@@ -1,11 +1,17 @@
-﻿using UnityEngine;
+﻿/*
+ * Simple Responsive UI System
+ * Copyright (c) 2026 Talha Doğan
+ * * Developed by Talha Doğan to manage dynamic UI layouts for Portrait and Landscape modes.
+ */
+
+using UnityEngine;
 using UnityEngine.UI;
 
 namespace SimpleResponsiveUI
 {
     /// <summary>
-    /// Stores and applies different RectTransform/Layout settings for Landscape and Portrait modes.
-    /// Use the Context Menu (Right Click on Component) to save settings.
+    /// Stores and applies different RectTransform settings for Landscape and Portrait modes.
+    /// Right-click the component in the Inspector to save current settings.
     /// </summary>
     [AddComponentMenu("Simple Responsive UI/Responsive Transform")]
     [DisallowMultipleComponent]
@@ -31,6 +37,7 @@ namespace SimpleResponsiveUI
         [Tooltip("Configuration for Portrait Mode.")]
         public LayoutSettings portraitSettings;
 
+        // Cached components
         private RectTransform _rect;
         private GridLayoutGroup _grid;
 
@@ -54,7 +61,6 @@ namespace SimpleResponsiveUI
 
             LayoutSettings target = isPortrait ? portraitSettings : landscapeSettings;
 
-            // Apply RectTransform settings
             if (_rect != null)
             {
                 _rect.anchorMin = target.anchorMin;
@@ -64,21 +70,22 @@ namespace SimpleResponsiveUI
                 _rect.localScale = target.localScale;
             }
 
-            // Apply Grid Layout settings (if applicable)
             if (_grid != null)
             {
                 _grid.constraintCount = target.gridConstraintCount;
             }
         }
 
-        // --- CONTEXT MENU TOOLS (Right-Click on Component) ---
+        #region Context Menu Tools (Editor)
 
         [ContextMenu("Save Current As LANDSCAPE")]
         public void SaveAsLandscape()
         {
             InitializeComponents();
             landscapeSettings = GetCurrentSettings();
+#if UNITY_EDITOR
             Debug.Log($"[ResponsiveTransform] Saved LANDSCAPE settings for: {gameObject.name}");
+#endif
         }
 
         [ContextMenu("Save Current As PORTRAIT")]
@@ -86,7 +93,9 @@ namespace SimpleResponsiveUI
         {
             InitializeComponents();
             portraitSettings = GetCurrentSettings();
+#if UNITY_EDITOR
             Debug.Log($"[ResponsiveTransform] Saved PORTRAIT settings for: {gameObject.name}");
+#endif
         }
 
         private LayoutSettings GetCurrentSettings()
@@ -106,5 +115,7 @@ namespace SimpleResponsiveUI
 
             return s;
         }
+
+        #endregion
     }
 }
