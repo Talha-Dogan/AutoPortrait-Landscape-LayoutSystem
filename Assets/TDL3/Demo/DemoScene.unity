@@ -853,6 +853,122 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 553691296}
   m_CullTransparentMesh: 1
+--- !u!1 &622322292
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 622322293}
+  - component: {fileID: 622322295}
+  - component: {fileID: 622322294}
+  - component: {fileID: 622322296}
+  m_Layer: 5
+  m_Name: BackGraund
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &622322293
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 622322292}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 749323354}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 2050, y: 5000}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &622322294
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 622322292}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 7482667652216324306, guid: 4515aa4c7cfa65c47826fc1bd6e7f4db, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &622322295
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 622322292}
+  m_CullTransparentMesh: 1
+--- !u!114 &622322296
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 622322292}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 11a3ef0f446e55a4f830e5ed0b7f4307, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SimpleResponsiveUI.ResponsiveTransform
+  landscapeSettings:
+    anchorMin: {x: 0.5, y: 0.5}
+    anchorMax: {x: 0.5, y: 0.5}
+    anchoredPosition: {x: 0, y: 0}
+    sizeDelta: {x: 2200, y: 1050}
+    localScale: {x: 1, y: 1, z: 1}
+    gridConstraint: 0
+    gridConstraintCount: 2
+    gridCellSize: {x: 100, y: 100}
+    gridSpacing: {x: 0, y: 0}
+    startCorner: 0
+    startAxis: 0
+    childAlignment: 0
+    uiSprite: {fileID: 7482667652216324306, guid: 63a9a96dea5a2224fa043231f26a359c, type: 3}
+  portraitSettings:
+    anchorMin: {x: 0.5, y: 0.5}
+    anchorMax: {x: 0.5, y: 0.5}
+    anchoredPosition: {x: 0, y: 0}
+    sizeDelta: {x: 2050, y: 5000}
+    localScale: {x: 1, y: 1, z: 1}
+    gridConstraint: 0
+    gridConstraintCount: 2
+    gridCellSize: {x: 100, y: 100}
+    gridSpacing: {x: 0, y: 0}
+    startCorner: 0
+    startAxis: 0
+    childAlignment: 0
+    uiSprite: {fileID: 7482667652216324306, guid: 4515aa4c7cfa65c47826fc1bd6e7f4db, type: 3}
 --- !u!1 &719881176
 GameObject:
   m_ObjectHideFlags: 0
@@ -1020,6 +1136,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 622322293}
   - {fileID: 926738736}
   - {fileID: 1361995524}
   m_Father: {fileID: 68305311}
@@ -1172,14 +1289,28 @@ MonoBehaviour:
     anchoredPosition: {x: -450, y: 9}
     sizeDelta: {x: 400, y: 400}
     localScale: {x: 2, y: 2, z: 1}
+    gridConstraint: 0
     gridConstraintCount: 2
+    gridCellSize: {x: 100, y: 100}
+    gridSpacing: {x: 0, y: 0}
+    startCorner: 0
+    startAxis: 0
+    childAlignment: 0
+    uiSprite: {fileID: 0}
   portraitSettings:
     anchorMin: {x: 0.5, y: 0.5}
     anchorMax: {x: 0.5, y: 0.5}
     anchoredPosition: {x: 0, y: 1000}
     sizeDelta: {x: 800, y: 700}
     localScale: {x: 2.161, y: 2.161, z: 2.161}
+    gridConstraint: 0
     gridConstraintCount: 2
+    gridCellSize: {x: 100, y: 100}
+    gridSpacing: {x: 0, y: 0}
+    startCorner: 0
+    startAxis: 0
+    childAlignment: 0
+    uiSprite: {fileID: 0}
 --- !u!114 &926738738
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1193,14 +1324,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.66666657, g: 0.66666657, b: 0.66666657, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 10911, guid: 0000000000000000f000000000000000, type: 0}
+  m_Sprite: {fileID: 7482667652216324306, guid: 63a9a96dea5a2224fa043231f26a359c, type: 3}
   m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1821,8 +1952,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -680, y: -278}
-  m_SizeDelta: {x: 100, y: 100}
+  m_AnchoredPosition: {x: 283.51965, y: -867.7126}
+  m_SizeDelta: {x: 222.4135, y: 431.0151}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1361995525
 MonoBehaviour:
@@ -1842,14 +1973,28 @@ MonoBehaviour:
     anchoredPosition: {x: 100, y: 306.3}
     sizeDelta: {x: 100, y: 100}
     localScale: {x: 2, y: 2, z: 1}
+    gridConstraint: 0
     gridConstraintCount: 2
+    gridCellSize: {x: 500, y: 72}
+    gridSpacing: {x: 0, y: 10}
+    startCorner: 0
+    startAxis: 0
+    childAlignment: 0
+    uiSprite: {fileID: 0}
   portraitSettings:
     anchorMin: {x: 0.5, y: 0.5}
     anchorMax: {x: 0.5, y: 0.5}
     anchoredPosition: {x: -680, y: -278}
-    sizeDelta: {x: 100, y: 100}
+    sizeDelta: {x: -200, y: 150}
     localScale: {x: 4.561974, y: 4.1970162, z: 1.0929759}
+    gridConstraint: 0
     gridConstraintCount: 2
+    gridCellSize: {x: 220, y: 70}
+    gridSpacing: {x: 0, y: 20}
+    startCorner: 0
+    startAxis: 0
+    childAlignment: 0
+    uiSprite: {fileID: 0}
 --- !u!114 &1361995526
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1870,7 +2015,7 @@ MonoBehaviour:
   m_ChildAlignment: 0
   m_StartCorner: 0
   m_StartAxis: 0
-  m_CellSize: {x: 400, y: 64}
+  m_CellSize: {x: 220, y: 70}
   m_Spacing: {x: 0, y: 20}
   m_Constraint: 0
   m_ConstraintCount: 2
