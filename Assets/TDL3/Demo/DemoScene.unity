@@ -1984,8 +1984,8 @@ MonoBehaviour:
   portraitSettings:
     anchorMin: {x: 0.5, y: 0.5}
     anchorMax: {x: 0.5, y: 0.5}
-    anchoredPosition: {x: -680, y: -278}
-    sizeDelta: {x: -200, y: 150}
+    anchoredPosition: {x: 283.51965, y: -867.7126}
+    sizeDelta: {x: 222.4135, y: 431.0151}
     localScale: {x: 4.561974, y: 4.1970162, z: 1.0929759}
     gridConstraint: 0
     gridConstraintCount: 2
@@ -1993,7 +1993,7 @@ MonoBehaviour:
     gridSpacing: {x: 0, y: 20}
     startCorner: 0
     startAxis: 0
-    childAlignment: 0
+    childAlignment: 5
     uiSprite: {fileID: 0}
 --- !u!114 &1361995526
 MonoBehaviour:
@@ -2012,7 +2012,7 @@ MonoBehaviour:
     m_Right: 0
     m_Top: 0
     m_Bottom: 0
-  m_ChildAlignment: 0
+  m_ChildAlignment: 5
   m_StartCorner: 0
   m_StartAxis: 0
   m_CellSize: {x: 220, y: 70}
