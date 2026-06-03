@@ -19,17 +19,23 @@ It is a lightweight, zero-code solution: you just arrange your UI in the Unity E
 
 ---
 
-## ⚙️ How It Works
+## ⚙️ How It Works (Step-by-Step Setup)
 
-You don't need to write any math or UI logic. Just follow this simple workflow in the Editor:
+You don't need to write any math or UI logic. Just follow this simple visual workflow in the Editor:
 
-1. Set up your UI elements (Buttons, Panels, Grids) for **Landscape** mode.
-2. Add the `ResponsiveTransform` component to your UI element, right-click the component header, and hit `Save Current As LANDSCAPE`.
-3. Switch your Game View to **Portrait** mode.
-4. Move and resize your UI elements to fit the portrait screen.
-5. Right-click the component again and hit `Save Current As PORTRAIT`.
+**1. Setup the Landscape Layout** Arrange your UI elements (Buttons, Panels, Grids) to perfectly fit the Landscape screen size.  
+<img width="468" alt="Landscape Setup" src="https://github.com/user-attachments/assets/e9c80ceb-c3f1-47c7-ad91-9d44f2f1a1a7" />
 
-Once set up, the `OrientationManager` automatically monitors the screen dimensions (`Screen.height > Screen.width`) and snaps to the correct saved layout.
+**2. Save Landscape Data** Add the `ResponsiveTransform` component to your UI element, right-click the component header, and hit `Save Current As LANDSCAPE`.  
+<img width="481" alt="Save Landscape" src="https://github.com/user-attachments/assets/87dde4ba-a6d1-469a-89bb-a5f3cc8f850e" />
+
+**3. Setup the Portrait Layout** Switch your Game View to Portrait mode. Move and resize your UI elements so they fit the new aspect ratio.  
+<img width="486" alt="Portrait Setup" src="https://github.com/user-attachments/assets/be7d69ae-95f5-4535-8c43-79cc03fe34b2" />
+
+**4. Save Portrait Data** Right-click the component again and hit `Save Current As PORTRAIT`.  
+<img width="248" alt="Save Portrait" src="https://github.com/user-attachments/assets/ba0c525d-41c2-47e8-96df-d7cd0435b986" />
+
+Once set up, the `OrientationManager` automatically monitors the screen dimensions (`Screen.height > Screen.width`) and snaps to the correct saved layout instantly.
 
 ---
 
@@ -48,7 +54,7 @@ Once set up, the `OrientationManager` automatically monitors the screen dimensio
 
 ---
 
-## 🖼️ Preview & Setup
+## 🖼️ Preview & API
 
 Here is a look at how the system adapts the interface dynamically:
 
@@ -63,14 +69,7 @@ Here is a look at how the system adapts the interface dynamically:
   </tr>
 </table>
 
-### Quick Setup Guide
-
-Because the system is designed to be plug-and-play, you don't need to write initialization scripts. Setting it up takes seconds:
-
-1. Add the `OrientationManager` to an empty GameObject in your initial scene.
-2. Attach the `ResponsiveTransform` to the UI elements you want to control.
-3. Use the Editor Context Menus (Right-Click) to save your layouts.
-4. *(Optional)* Drop `ResponsiveCamera` onto your Main Camera to manage FOV.
+Because the system is designed to be plug-and-play, you don't need to write initialization scripts. Just add `OrientationManager` to your scene and you're good to go. 
 
 If you ever need to interact with the system via code (for example, generating UI at runtime), the API is straightforward:
 
