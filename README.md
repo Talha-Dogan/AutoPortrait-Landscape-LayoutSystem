@@ -1,63 +1,56 @@
 # Simple Responsive UI
 
-Dealing with UI when a mobile game swaps between portrait and landscape has always been a headache. I got pretty tired of constantly writing scripts just to recalculate UI positions every time the screen flips, so I put together **Simple Responsive UI**. 
+Handling UI transitions between portrait and landscape modes in mobile games can be incredibly frustrating. Instead of writing custom scripts to recalculate positions and scales every time the screen rotates, I built **Simple Responsive UI** to handle it visually.
 
-It takes a completely visual approach. Instead of messing with code, you just arrange your UI for portrait and landscape right in the Editor and save a "snapshot" for each.
+It is a lightweight, zero-code solution: you just arrange your UI in the Unity Editor for both orientations and save a "snapshot" for each. The system handles the rest automatically.
 
 **Developed by:** Talha Doğan
 
 ---
 
-## How it Works
+## 🚀 Features
 
-Instead of doing math in your scripts, you just use the Unity Editor:
-
-1. Set up your layout (Buttons, Panels, Grids, etc.) for Landscape mode.
-2. Right-click the UI component and hit `Save as Landscape`.
-3. Flip your Game View over to Portrait mode.
-4. Move and resize your UI elements so they fit nicely.
-5. Right-click again and hit `Save as Portrait`.
-
-That's really it. The `Orientation Manager` handles the rest. It catches whenever the device rotates and snaps the right layout into place. It even works while you're in Edit Mode, so you don't have to constantly build to test it.
+* **Visual Workflow (WYSIWYG):** Design directly on the Canvas. No need to calculate anchor points, offsets, or sizes in code.
+* **Live Editor Preview:** Powered by `[ExecuteAlways]`, your UI adapts instantly when you resize the Game window—even in Edit Mode.
+* **Deep Grid Support:** Automatically updates `GridLayoutGroup` constraints, cell sizes, spacing, alignment, start corners, and axes based on the screen orientation.
+* **Camera FOV Adaptation:** Includes a `ResponsiveCamera` component to dynamically adjust your Camera's Field of View when the device rotates.
+* **Canvas Scaler Sync:** Automatically toggles the "Match Width/Height" property to ensure your overall UI scales correctly without distortion.
+* **Clean & Performant:** Protected by the `SimpleResponsiveUI` namespace, uses smart caching, and only triggers updates when an actual orientation change is detected.
 
 ---
 
-## Why Use It?
+## ⚙️ How It Works
 
-* **Visual Design:** You handle everything right on the Canvas. No need to write a single line of code to calculate positions.
-* **Instant Preview:** The moment you resize your Game window, the UI adapts on the fly.
-* **Native Fit:** Works out of the box with Unity's built-in `RectTransform` and `GridLayoutGroup` components.
-* **Clean Foundation:** Wrapped in a namespace so it won't clash with your existing codebase, and optimized to keep things running smooth.
+You don't need to write any math or UI logic. Just follow this simple workflow in the Editor:
 
----
+1. Set up your UI elements (Buttons, Panels, Grids) for **Landscape** mode.
+2. Add the `ResponsiveTransform` component to your UI element, right-click the component header, and hit `Save Current As LANDSCAPE`.
+3. Switch your Game View to **Portrait** mode.
+4. Move and resize your UI elements to fit the portrait screen.
+5. Right-click the component again and hit `Save Current As PORTRAIT`.
 
-## Key Features
-
-* **Dual Layout Saving:** Stores independent Anchor, Position, Size, and Scale values for both orientations.
-* **Canvas Scaler Sync:** Automatically tweaks the "Match Width/Height" value so your UI doesn't scale weirdly when rotating.
-* **Dynamic Grids:** Need 4 columns in landscape but only 2 in portrait? It picks up on `GridLayoutGroup` changes and applies them dynamically.
-* **Quick Menus:** Everything is just a right-click away in the Editor for a fast workflow.
+Once set up, the `OrientationManager` automatically monitors the screen dimensions (`Screen.height > Screen.width`) and snaps to the correct saved layout.
 
 ---
 
-## Requirements
+## 📌 Requirements
 
 * Unity 2020.3 or newer.
 * Standard Unity UI (uGUI).
 
 ---
 
-## What's in the Box?
+## 📦 What's Included
 
-* `OrientationManager.cs`: Drop this into your scene to keep an eye on screen changes in the background.
-* `ResponsiveTransform.cs`: The main component you'll attach to the UI elements you want to control.
-* A demo scene and quick docs to get you up and running immediately.
+* `OrientationManager.cs`: A persistent singleton that monitors screen orientation and gracefully handles scene transitions.
+* `ResponsiveTransform.cs`: The core component you attach to UI elements to save and apply `RectTransform`, `GridLayoutGroup`, and `Sprite` data.
+* `ResponsiveCamera.cs`: An optional component to handle FOV shifts for your Main Camera.
 
 ---
 
-## Screenshots & Quick Setup
+## 🖼️ Preview & Setup
 
-Here is a look at how the system adapts the interface:
+Here is a look at how the system adapts the interface dynamically:
 
 <table>
   <tr>
@@ -70,20 +63,36 @@ Here is a look at how the system adapts the interface:
   </tr>
 </table>
 
-You don't actually need to write any code to use this tool, but if you're wondering how the architecture kicks off in the background, here's a quick peek:
+### Quick Setup Guide
+
+Because the system is designed to be plug-and-play, you don't need to write initialization scripts. Setting it up takes seconds:
+
+1. Add the `OrientationManager` to an empty GameObject in your initial scene.
+2. Attach the `ResponsiveTransform` to the UI elements you want to control.
+3. Use the Editor Context Menus (Right-Click) to save your layouts.
+4. *(Optional)* Drop `ResponsiveCamera` onto your Main Camera to manage FOV.
+
+If you ever need to interact with the system via code (for example, generating UI at runtime), the API is straightforward:
 
 ```csharp
 using UnityEngine;
 using SimpleResponsiveUI;
 
-public class UIManager : MonoBehaviour
+public class UIGenerator : MonoBehaviour
 {
-    // Make sure you have OrientationManager in your active scene.
-    // It automatically listens for screen rotation events.
-    
+    public ResponsiveTransform myDynamicPanel;
+
     void Start()
     {
-        // The OrientationManager reads the initial device orientation on startup
-        // and instantly applies the correct layout to your UI.
+        // The OrientationManager runs automatically via [ExecuteAlways].
+        // However, if you are building UI dynamically via code, you can trigger 
+        // layout saves manually just like the Editor context menus do:
+        
+        // myDynamicPanel.SaveAsLandscape();
+        // myDynamicPanel.SaveAsPortrait();
+        
+        // You can also force a specific orientation check on a specific element:
+        bool isPortrait = Screen.height > Screen.width;
+        myDynamicPanel.ApplyOrientation(isPortrait);
     }
 }
